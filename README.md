@@ -1,4 +1,4 @@
-# scenarioHandler ( on development )
+# ScenarioHandler ( on development )
 
 ScenarioHelper is a library that helps to transition from one card to the other card without coding much.
 It will maximize the re-usability of the templates, minimize coding.
@@ -10,14 +10,17 @@ PAGE : a combination of UI template and event triggers. one CARD can have multip
 TEMPLATE : ui definitions
 EVENT_TRIGGER : event trigger
 
-CARD : 
+CARD :
+
 ```js
 {
   [Pages.MyPage1] : PageSample1
-  [Pages.MyPage3] : PageSample2  
+  [Pages.MyPage3] : PageSample2
 }
 ```
-Page : 
+
+Page :
+
 ```js
 {
    template: myTemplate,
@@ -27,7 +30,9 @@ Page :
    ]
 }
 ```
+
 EventTrigger:
+
 ```js
 {
   ui: {
@@ -35,14 +40,16 @@ EventTrigger:
     label: data => parseLabel(data), // if the content is function, run function with card's data (usually from network, but depending on redux state)
   },
   event: new ScenarioMovePageEvent( // event
-    EventActions.MOVE_PAGE, 
+    EventActions.MOVE_PAGE,
     new MovePageValue(
-      Pages.MyPage2, 
+      Pages.MyPage2,
       TransitioningEffects.FLIP
     )
 }
 ```
-Template : 
+
+Template :
+
 ```js
 export class MyTemplate extends ScenarioTemplate {
   construct(props){
@@ -56,8 +63,8 @@ export class MyTemplate extends ScenarioTemplate {
           {
             this.getEventTriggers().map((trigger,idx)=>{ //this.getEventTriggers returns the array of handledEventTrigger
               return (
-                <Button 
-                  onClick={()=>this.runEvent(idx)} 
+                <Button
+                  onClick={()=>this.runEvent(idx)}
                   aria-label={triger.ui.label}
                 >
                   {trigger.ui.text}
@@ -65,7 +72,7 @@ export class MyTemplate extends ScenarioTemplate {
               );
             });
           }
-          
+
         </p>
       </div>
     );
