@@ -1,0 +1,25 @@
+{
+  "name": "scenario-handler",
+  "version": "1.0.0",
+  "description": "handling scenario that can behave differently from reusable ui templates",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wootra/scenario-handler.git"
+  },
+  "keywords": [
+    "scenario",
+    "state-handling",
+    "state",
+    "scenario-handling"
+  ],
+  "author": "Song Jun",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wootra/scenario-handler/issues"
+  },
+  "homepage": "https://github.com/wootra/scenario-handler#readme"
+}
