@@ -5,33 +5,43 @@ It will maximize the re-usability of the templates, minimize coding.
 instead of React coding, we will use json like object definition to create/modify a new UI look.
 ScenarioHelper take advantage of Redux.
 
-CARD : a base wrapper the scenario will handle
-PAGE : a combination of UI template and event triggers. one CARD can have multiple pages.
+SCENARIO_GROUP : a group of scenario. simply an object of [string]: Scenario pairs.
+SCENARIO : a group of relation among Scens. one SCENARIO can have multiple SCENS.
+SCEN : a combination of UI template and event triggers.
 TEMPLATE : ui definitions
 EVENT_TRIGGER : event trigger
 
-CARD :
+SCENARIO_GROUP : Object.<string, Scenario>
 
 ```js
 {
-  [Pages.MyPage1] : PageSample1
-  [Pages.MyPage3] : PageSample2
+  Card1: Scenario1,
+  Card2: Scenario2,
 }
 ```
 
-Page :
+SCENARIO : {activeScen: function(data, prevScen, nextScen):Scen, scens: [Scen]}
 
 ```js
 {
-   template: myTemplate,
-   eventTriggers: [
-     myEventTrigger1,
-     myEventTrigger2
-   ]
+  activeScen: activeScenState => Scen,
+  scens: [Scen],
 }
 ```
 
-EventTrigger:
+SCEN : {template: Element, eventTriggers: [EventTrigger]}
+
+```js
+{
+  template: myTemplate,
+  eventTriggers: [
+    myEventTrigger1,
+    myEventTrigger2
+  ]
+}
+```
+
+EventTrigger: {ui: object, event: ScenarioEvent}
 
 ```js
 {
@@ -48,34 +58,48 @@ EventTrigger:
 }
 ```
 
-Template :
+Template : {ReactElement}
 
-```js
-export class MyTemplate extends ScenarioTemplate {
-  construct(props){
-    super(Pages.MyPage1);
-  }
-  render(){
-    return (
-      <div>
-        <h1>page 1</h1>
-        <p>
-          {
-            this.getEventTriggers().map((trigger,idx)=>{ //this.getEventTriggers returns the array of handledEventTrigger
-              return (
-                <Button
-                  onClick={()=>this.runEvent(idx)}
-                  aria-label={triger.ui.label}
-                >
-                  {trigger.ui.text}
-                </Button>
-              );
-            });
-          }
+```jsx
+// myScenario.js
+import ScenarioHandler from "scenario-handler";
+...
+const scenario1 = new ScenarioHandler.Scenario(...);
+const scenario2 = new ScenarioHandler.Scenario(...);
+const scenarioGroup={
+  Card1: scenario1,
+  Card2: scenario2,
+}
+export const myScenario = new ScenarioHandler.ScenarioHelper(scenarioGroup);
+// ScenTemplate.jsx
+import React, {useDispatch} from "react";
+import ScenarioHandler from "scenario-handler";
+import {myScenario} from "./myScenario.js";
 
-        </p>
-      </div>
-    );
-  }
+export const ScenTemplate = props => {
+  const dispatch = useDispatch();
+  const {eventTriggers, runEvent} = ScenarioHandler.useScenario(myScenario, props.scenName, dispatch);
+
+  return (
+    <div>
+      <h1>page 1</h1>
+      <p>
+        {
+          eventTriggers.map((trigger,idx)=>{ //this.getEventTriggers returns the array of handledEventTrigger
+            return (
+              <Button
+                onClick={()=>runEvent(idx)}
+                aria-label={triger.ui.label}
+              >
+                {trigger.ui.text}
+              </Button>
+            );
+          });
+        }
+
+      </p>
+    </div>
+  );
+
 }
 ```
