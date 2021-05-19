@@ -1,4 +1,4 @@
-import { EventTrigger } from './EventTriggers';
+import { EventTrigger } from '../events/EventTrigger';
 
 export class Scen {
 	/**

@@ -49,10 +49,10 @@ EventTrigger: {ui: object, event: ScenarioEvent}
     text: "My-Text", //basically depending on your template,
     label: data => parseLabel(data), // if the content is function, run function with card's data (usually from network, but depending on redux state)
   },
-  event: new ScenarioMovePageEvent( // event
+  event: new ScenarioMoveScenEvent( // event
     EventActions.MOVE_PAGE,
-    new MovePageValue(
-      Pages.MyPage2,
+    new MoveScenValue(
+      Scens.MyScen2,
       TransitioningEffects.FLIP
     )
 }

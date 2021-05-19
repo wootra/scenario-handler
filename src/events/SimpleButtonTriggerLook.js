@@ -1,3 +1,4 @@
+import { TriggerLook } from './TriggerLook';
 export class SimpleButtonTriggerLook extends TriggerLook {
 	/**
 	 *

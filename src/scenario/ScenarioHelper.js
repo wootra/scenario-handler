@@ -1,3 +1,4 @@
+import { Scen } from './Scen';
 import { TransitionEffect } from './TransitionEffect';
 
 /**
@@ -9,7 +10,7 @@ import { TransitionEffect } from './TransitionEffect';
 export class ScenarioHelper {
 	/**
 	 *
-	 * @param {Object.<string, Array<Page>>} scenario
+	 * @param {Object.<string, Array<Scen>>} scenario
 	 */
 	constructor(scenario) {}
 }

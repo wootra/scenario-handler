@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ScenarioHelper } from 'scenario-handler';
 
-const Template = ({ scenarioHelper }) => {
+export const Template1 = ({ scenarioHelper }) => {
 	scenarioHelper.useEventTriggers(props);
 	return (
 		<div>
@@ -12,6 +12,6 @@ const Template = ({ scenarioHelper }) => {
 	);
 };
 
-Template.propTypes = {
+Template1.propTypes = {
 	scenarioHelper: PropTypes.instanceOf(ScenarioHelper),
 };

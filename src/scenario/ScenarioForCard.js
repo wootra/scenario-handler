@@ -1,4 +1,4 @@
-import { Page } from './Page';
+import { Scen } from './Scen';
 
 export class ScenarioForCard {
 	/**
@@ -12,9 +12,9 @@ export class ScenarioForCard {
 
 	/**
 	 *
-	 * @param {Page} scenario
+	 * @param {Scen} scenario
 	 */
-	addPages(scenario) {
+	addScens(scenario) {
 		for (const pageName in scenario) {
 			this.pages.set(pageName, scenario[pageName]);
 		}
@@ -23,9 +23,9 @@ export class ScenarioForCard {
 	/**
 	 *
 	 * @param {string} page
-	 * @returns {Page}
+	 * @returns {Scen}
 	 */
-	getPage(page) {
+	getScen(page) {
 		return this.pages.get(page);
 	}
 

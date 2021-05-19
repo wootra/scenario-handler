@@ -1,6 +1,6 @@
 const init = {};
 const pageState = Object.freeze({
-	currPage: null,
+	currScen: null,
 	lastCalledEventTrigger: -1,
 });
 

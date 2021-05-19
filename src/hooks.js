@@ -1,5 +1,5 @@
 import { scenarioReducer } from './scenarioReducer';
-import { Page } from './Scen';
+import { Scen } from './scenario/Scen';
 import { Scenario } from './Scenario';
 
 /**

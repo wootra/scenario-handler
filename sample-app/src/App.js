@@ -9,7 +9,10 @@ function App() {
 			<header className='App-header'>
 				<img src={logo} className='App-logo' alt='logo' />
 				<Counter />
-
+				<ScenCard scen='Scen1' />
+				<ScenCard scen='Scen1' />
+				<ScenCard scen='Scen1' />
+				<ScenCard scen='Scen1' />
 				<p>
 					Edit <code>src/App.js</code> and save to reload.
 				</p>
