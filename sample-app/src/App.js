@@ -2,6 +2,8 @@ import React from 'react';
 import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
 import './App.css';
+import { myScenario, cards } from './myScenario';
+import { ScenCard } from './features/card/ScenCard';
 
 function App() {
 	return (
@@ -9,10 +11,9 @@ function App() {
 			<header className='App-header'>
 				<img src={logo} className='App-logo' alt='logo' />
 				<Counter />
-				<ScenCard scen='Scen1' />
-				<ScenCard scen='Scen1' />
-				<ScenCard scen='Scen1' />
-				<ScenCard scen='Scen1' />
+				{cards.map(card => (
+					<ScenCard scen='Scen1' scenario={myScenario[card]} />
+				))}
 				<p>
 					Edit <code>src/App.js</code> and save to reload.
 				</p>

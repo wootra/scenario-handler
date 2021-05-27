@@ -1,9 +1,9 @@
 import { TriggerLook } from './TriggerLook';
 export class SimpleButtonTriggerLook extends TriggerLook {
 	/**
-	 *
-	 * @param {string|function(object):string|Element} child
-	 * @param {string|function(object):string} ariaLabel
+	 * defines button trigger's look
+	 * @param {import ('../typedefs/eventTypes').ButtonChildInfo} child
+	 * @param {import ('../typedefs/eventTypes').ButtonLabelInfo} ariaLabel
 	 */
 	constructor(child, ariaLabel) {
 		super('SimpleButton');
@@ -12,22 +12,24 @@ export class SimpleButtonTriggerLook extends TriggerLook {
 	}
 
 	/**
-	 * get child as an element or a string from data object if child is a function
-	 * @param {object} data
-	 * @returns {string|Element}
+	 * get child of the trigger element.
+	 * @param {*} data dynamic data that is used in the template
+	 * @return {[Element]|string|Element|null}
 	 */
-	getText(data) {
+	getChild(data) {
 		if (typeof this.child === 'function') return this.child(data);
 		else return this.child;
 	}
 
 	/**
-	 * get aria label string
-	 * @param {object} data
-	 * @returns {string}
+	 * get props of the trigger element
+	 * @param {*} data dynamic data that is used in the template
+	 * @return {object} props
 	 */
-	getAriaLabel(data) {
-		if (typeof this.ariaLabel === 'function') return this.ariaLabel(data);
-		else return this.ariaLabel;
+	getProps(data) {
+		return {
+			['aria-label']:
+				typeof this.ariaLabel === 'function' ? ariaLabel(data) : ariaLabel,
+		};
 	}
 }

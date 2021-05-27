@@ -7,10 +7,14 @@ import { TransitionEffect } from './TransitionEffect';
  * @param {Array<TransitionEffect>}
  */
 
+/**
+ * @typedef {Object.<string, Scen>} Scens
+ */
+
 export class ScenarioHelper {
 	/**
 	 *
-	 * @param {Object.<string, Array<Scen>>} scenario
+	 * @param {Object.<string, Scens>} scenario
 	 */
 	constructor(scenario) {}
 }

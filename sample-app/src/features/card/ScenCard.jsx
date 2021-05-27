@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ScenarioHelper } from 'scenario-handler';
+import { ScenarioHelper, useEventTriggers } from 'scenario-handler';
 
-export const ScenCard = () => {
+export const ScenCard = ({ scenario }) => {
 	const { wrapperClass, wrapperClass2 } = useSelector(
 		state => state.scenarioReducer.data
 	);

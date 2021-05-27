@@ -1,29 +1,59 @@
 import { Scen } from './Scen';
 
 /**
- * @callback ActiveScenParser
- * @param {object} data
- * @param {Scen} prevScen
- * @param {Scen} nextScen
- * @return {Scen}
- */
-
-/**
- * @typedef Scenario
+ * @typedef {import ('../typedefs/scenTypes').ScenOrScenInfo} ScenOrScenInfo
  */
 export class Scenario {
 	/**
 	 *
-	 * @param {{activeScenParser: ActiveScenParser, scens: Array<Scen>}} scenario
+	 * @param {string} scnarioName
+	 * @param {Object.<string,ScenOrScenInfo>} scens
 	 */
-	constructor(scenario) {
-		const { activeScenParser, scens } = scenario;
-		this.activeScenParser = activeScenParser;
-		this.scensMap = new Map();
-		for (const scen of scens) {
-			this.scensMap.set(scen.name, scen);
+	constructor(scnarioName, scens) {
+		this.scnarioName = scnarioName;
+		this.scens = {};
+		if (scens) {
+			addScns(scens);
 		}
-		this.activeScen = null;
+	}
+
+	/**
+	 *
+	 * @param {Object.<string, ScenOrScenInfo>} scens
+	 */
+	addScens(scens) {
+		for (const scenName in scens) {
+			const scen = scens[scenName];
+			if (scen instanceof Scen) {
+				if (scen.name !== scenName) {
+					throw new Error(
+						'name of Scen should be the same name with key of scens object.'
+					);
+				}
+				this.scens[scenName] = scen;
+			} else {
+				this.scens[scenName] = new Scen(
+					scenName,
+					scen.template,
+					scen.eventTriggers
+				);
+			}
+		}
+	}
+
+	/**
+	 * @param {string} scenName uniq name of the Scen
+	 * @param {ScenOrScenInfo} scen
+	 */
+	addScen(scenName, scen) {
+		if (scen instanceof Scen) {
+			scen.setName(scenName);
+			this.scens[scen.name] = scen;
+		} else {
+			const aScen = new Scen(scen.template, scen.eventTriggers);
+			aScen.setName(scenName);
+			this.scens[scen.name] = aScen;
+		}
 	}
 
 	/**
@@ -32,33 +62,14 @@ export class Scenario {
 	 * @returns {Scen}
 	 */
 	getScen(scenName) {
-		return this.scensMap(scenName);
+		return this.scens[scenName];
 	}
 
 	/**
-	 * return activeScen based on data
-	 * @param {object} data
-	 * @param {Scen} prevScen
-	 * @param {Scen} nextScen
-	 * @returns {Scen}
+	 *
+	 * @returns {string}
 	 */
-	calcActiveScen(data, prevScen, nextScen) {
-		return this.activeScenParser(data, prevScen, nextScen);
-	}
-
-	/**
-	 * return saved active scen
-	 * @returns {Scen}
-	 */
-	getActiveScen() {
-		return this.activeScen;
-	}
-
-	/**
-	 * save activeScen
-	 * @param {Scen} scen
-	 */
-	setActiveScen(scen) {
-		this.activeScen = scen;
+	getName() {
+		return this.scnarioName;
 	}
 }

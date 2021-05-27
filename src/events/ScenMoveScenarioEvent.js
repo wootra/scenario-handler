@@ -1,24 +1,17 @@
 import { ScenarioEvent } from './ScenarioEvent';
+import { ScenarioMoveEvents } from './ScenarioMoveEvents';
 
 /**
- * Events that Scenario Handler should do.
- * ex)
+ * Move to other Scen
  */
 export class ScenMoveScenarioEvent extends ScenarioEvent {
 	/**
-	 *
-	 * @param {string} scenNameToMove Scen's name to move
+	 * create an event which describe which Scen to move
+	 * @param {import('./ScenarioMoveEvents').ScenarioMoveEventsItem} scenarioMoveEventType one of ScenarioMoveEvents type
+	 * @param {string} scenNameToMove
 	 */
-	constructor(scenNameToMove) {
-		super('ScenMove');
+	constructor(scenarioMoveEventType, scenNameToMove) {
+		super(scenarioMoveEventType);
 		this.scenNameToMove = scenNameToMove;
-	}
-
-	getEventType() {
-		if (this.eventType) return this.eventType;
-		else
-			throw new Error(
-				'ScenarioEvent should be extended. Do not use it purely.'
-			);
 	}
 }
